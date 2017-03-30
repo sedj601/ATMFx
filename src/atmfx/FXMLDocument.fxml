@@ -10,10 +10,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import jfxtras.scene.layout.GridPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atmfx.FXMLDocumentController">
+<AnchorPane id="AnchorPane" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" prefHeight="564.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atmfx.FXMLDocumentController">
    <children>
       <BorderPane layoutX="263.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -95,7 +93,7 @@
                <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" visible="false">
                      <children>
-                        <GridPane hgap="5.0" vgap="5.0">
+                        <GridPane fx:id="gpNumberPad" hgap="5.0" vgap="5.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
                             <ColumnConstraints hgrow="SOMETIMES" />
@@ -135,7 +133,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity">
                      <children>
-                        <GridPane layoutX="14.0">
+                        <GridPane fx:id="gpKeyboard" layoutX="14.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" />
                             <ColumnConstraints hgrow="SOMETIMES" />
