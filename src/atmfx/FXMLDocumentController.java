@@ -7,10 +7,14 @@ package atmfx;
 
 import java.net.*;
 import java.util.*;
+import java.util.Observable;
+import javafx.beans.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import org.controlsfx.control.textfield.*;
 
 /**
  *
@@ -21,25 +25,19 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private GridPane gpKeyboard, gpNumberPad;
     @FXML
-    private AnchorPane apWelcomeScreen;
+    private AnchorPane apWelcomeScreen, apSetupAccountOne;
     @FXML
     private Button btnRightOne, btnRightTwo, btnRightThree, btnRightFour, btnLeftOne, btnLeftTwo, btnLeftThree, btnLeftFour;
     //add check balance screen
 
+    @FXML private CustomTextField ctfTest;
+    private static final Image image = new Image("/org/controlsfx/samples/security-low.png");
+    
     Map<String, Button> buttons = new HashMap<>();
-    boolean isWelcomeScreenShowingi;
-    boolean isDepositScreenShowing;
-    boolean isWithdrawalScreenShowing;
-    boolean isSetupAccountScreenShowing;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        isWelcomeScreenShowingi = true;
-        isDepositScreenShowing = false;
-        isWithdrawalScreenShowing = false;
-        isSetupAccountScreenShowing = false;
-
         btnLeftOne.setOnAction((event) ->
         {
             System.out.println("Loading Setup Account Screen");
@@ -124,21 +122,10 @@ public class FXMLDocumentController implements Initializable {
     {
         apWelcomeScreen.setVisible(true);
         gpKeyboard.setVisible(true);
-        isWelcomeScreenShowingi = true;
-
-        gpNumberPad.setVisible(false);
-        isDepositScreenShowing = false;
-        isWithdrawalScreenShowing = false;
-        isSetupAccountScreenShowing = false;
-
         btnLeftOne.setOnAction((event) ->
         {
             showSetupAccountScreen();
         });
-        btnLeftTwo.setOnAction(null);
-        btnLeftThree.setOnAction(null);
-        btnLeftFour.setOnAction(null);
-
         btnRightOne.setOnAction((event) ->
         {
             showWithdrawalScreen();
@@ -147,31 +134,60 @@ public class FXMLDocumentController implements Initializable {
         {
             showDepositScreen();
         });
+        
+        gpNumberPad.setVisible(false);
+        btnLeftTwo.setOnAction(null);
+        btnLeftThree.setOnAction(null);
+        btnLeftFour.setOnAction(null);        
         btnRightThree.setOnAction(null);
         btnRightFour.setOnAction(null);
     }
 
     private void showSetupAccountScreen()
     {
-//        apWelcomeScreen.setVisible(true);
-//        gpKeyboard.setVisible(true);
-//        isWelcomeScreenShowingi = true;
-//
-//        gpNumberPad.setVisible(false);
-//        isDepositScreenShowing = false;
-//        isWithdrawalScreenShowing = false;
-//        isSetupAccountScreenShowing = false;
-//
-//        btnLeftOne.setOnAction((event)->{showSetupAccountScreen();});
-//        btnLeftTwo.setOnAction(null);
-//        btnLeftThree.setOnAction(null);
-//        btnLeftFour.setOnAction(null);
-//
-//        btnRightOne.setOnAction((event)->{showWithdrawalScreen();});
-//        btnRightTwo.setOnAction((event)->{showDepositScreen();});
-//        btnRightThree.setOnAction(null);
-//        btnRightFour.setOnAction(null);
+        apSetupAccountOne.setVisible(true);
+        gpKeyboard.setVisible(true);        
+        btnLeftOne.setOnAction((event)->{createAccount();});
+        btnRightOne.setOnAction((event)->{cancelAccountCreation();});
+         
+        apWelcomeScreen.setVisible(false);
+        gpNumberPad.setVisible(false);        
+        btnLeftTwo.setOnAction(null);
+        btnLeftThree.setOnAction(null);
+        btnLeftFour.setOnAction(null);      
+        btnRightTwo.setOnAction(null);
+        btnRightThree.setOnAction(null);
+        btnRightFour.setOnAction(null);
+        
+        ctfTest.textProperty().addListener((observable)->{
+            String text = ctfTest.getText();
+            boolean isTextEmpty = text == null || text.isEmpty();
+            if (isTextEmpty) 
+            {
+                ctfTest.setLeft(new ImageView(image));
+                System.out.println("empty field");                   
+            } 
+            else 
+            {
+                ctfTest.setLeft(null);
+                System.out.println("something in field");
+            }
+        });
     }
+//        ctfTest.textProperty().addListener(new InvalidationListener() {
+//            @Override public void invalidated(Observable arg0) {
+//                String text = inputField.getText();
+//                boolean isTextEmpty = text == null || text.isEmpty();
+//                boolean isButtonVisible = fader.getNode().getOpacity() > 0;
+//
+//                if (isTextEmpty && isButtonVisible) {
+//                    setButtonVisible(false);
+//                } else if (!isTextEmpty && !isButtonVisible) {
+//                    setButtonVisible(true);
+//                }
+//            }
+//    });
+        
 
     private void showDepositScreen()
     {
@@ -215,5 +231,14 @@ public class FXMLDocumentController implements Initializable {
 //        btnRightTwo.setOnAction((event)->{showDepositScreen();});
 //        btnRightThree.setOnAction(null);
 //        btnRightFour.setOnAction(null);
+    }
+    
+    private void createAccount(){
+        
+    }
+    
+    private void cancelAccountCreation()
+    {
+        
     }
 }
