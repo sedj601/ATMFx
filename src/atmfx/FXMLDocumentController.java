@@ -5,13 +5,13 @@
  */
 package atmfx;
 
+import DataBaseHandler.*;
+import SedsValidateFx.*;
 import java.net.*;
 import java.util.*;
-import java.util.Observable;
-import javafx.beans.*;
+import javafx.collections.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import org.controlsfx.control.textfield.*;
@@ -30,16 +30,28 @@ public class FXMLDocumentController implements Initializable {
     private Button btnRightOne, btnRightTwo, btnRightThree, btnRightFour, btnLeftOne, btnLeftTwo, btnLeftThree, btnLeftFour;
     //add check balance screen
 
-    @FXML private CustomTextField ctfTest;
-    private static final Image image = new Image("/org/controlsfx/samples/security-low.png");
-    
+    @FXML
+    private TextField tfCAFirstName, tfCALastName, tfCAStreetAddress, tfCACity, tfCAState, tfCAZip,
+            tfCACheckingInitialDeposit, tfCASavingsInitialDeposit;
+    @FXML
+    private ChoiceBox cbCreateChecking, cbCreateSavings;
+
+    @FXML
+    private CustomTextField ctfTest;
+
     Map<String, Button> buttons = new HashMap<>();
+
+    ValidateTextField vtf;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        btnLeftOne.setOnAction((event) ->
-        {
+        cbCreateChecking.setItems(FXCollections.observableArrayList("No", "Yes"));
+        cbCreateSavings.setItems(FXCollections.observableArrayList("No", "Yes"));
+        cbCreateChecking.setValue("No");
+        cbCreateSavings.setValue("No");
+
+        btnLeftOne.setOnAction((event) -> {
             System.out.println("Loading Setup Account Screen");
             showSetupAccountScreen();
         });
@@ -47,13 +59,11 @@ public class FXMLDocumentController implements Initializable {
         btnLeftThree.setOnAction(null);
         btnLeftFour.setOnAction(null);
 
-        btnRightOne.setOnAction((event) ->
-        {
+        btnRightOne.setOnAction((event) -> {
             System.out.println("Loading Withdrawal Screen");
             showWithdrawalScreen();
         });
-        btnRightTwo.setOnAction((event) ->
-        {
+        btnRightTwo.setOnAction((event) -> {
             System.out.println("Loading Deposit Screen");
             showDepositScreen();
         });
@@ -62,33 +72,36 @@ public class FXMLDocumentController implements Initializable {
 
         gpKeyboard.getChildren().stream().filter((tempNode)
                 -> (tempNode instanceof Button)).map((
-                tempNode) -> (Button) tempNode).forEachOrdered((tempButton) ->
-        {
+                tempNode) -> (Button) tempNode).forEachOrdered((tempButton) -> {
             buttons.put(tempButton.getText().toLowerCase(), tempButton);
         });
+
     }
 
     @FXML
     private void handleOnKeyReleased(KeyEvent event)
     {
-
+        System.out.println();
         Button tempButton = buttons.get(event.getText());
-        System.out.println("Released: " + event.getText());
+        System.out.println("Released key text: " + event.getText());
+        System.out.println("Released key code: " + event.getCode());
 
-        if (tempButton != null)
-        {
+        if (tempButton != null) {
             tempButton.disarm();
             tempButton.setStyle("");
         }
-        else if (event.getCode().equals(KeyCode.ENTER))
-        {
+        else if (event.getCode().equals(KeyCode.ENTER)) {
             tempButton = buttons.get("enter");
             tempButton.disarm();
             tempButton.setStyle("");
         }
-        else if (event.getCode().equals(KeyCode.BACK_SPACE))
-        {
+        else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
             tempButton = buttons.get("backspace");
+            tempButton.disarm();
+            tempButton.setStyle("");
+        }
+        else if (event.getCode().equals(KeyCode.SPACE)) {
+            tempButton = buttons.get("space");
             tempButton.disarm();
             tempButton.setStyle("");
         }
@@ -98,21 +111,24 @@ public class FXMLDocumentController implements Initializable {
     private void handleOnKeyPressed(KeyEvent event)
     {
         Button tempButton = buttons.get(event.getText());
-        System.out.println("Pressed: " + event.getText());
-        if (tempButton != null)
-        {
+        System.out.println("Pressed key text: " + event.getText());
+        System.out.println("Pressed key code: " + event.getCode());
+        if (tempButton != null) {
             tempButton.arm();
             tempButton.setStyle("-fx-background-color: blue");
         }
-        else if (event.getCode().equals(KeyCode.ENTER))
-        {
+        else if (event.getCode().equals(KeyCode.ENTER)) {
             tempButton = buttons.get("enter");
             tempButton.arm();
             tempButton.setStyle("-fx-background-color: blue");
         }
-        else if (event.getCode().equals(KeyCode.BACK_SPACE))
-        {
+        else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
             tempButton = buttons.get("backspace");
+            tempButton.arm();
+            tempButton.setStyle("-fx-background-color: blue");
+        }
+        else if (event.getCode().equals(KeyCode.SPACE)) {
+            tempButton = buttons.get("space");
             tempButton.arm();
             tempButton.setStyle("-fx-background-color: blue");
         }
@@ -122,23 +138,20 @@ public class FXMLDocumentController implements Initializable {
     {
         apWelcomeScreen.setVisible(true);
         gpKeyboard.setVisible(true);
-        btnLeftOne.setOnAction((event) ->
-        {
+        btnLeftOne.setOnAction((event) -> {
             showSetupAccountScreen();
         });
-        btnRightOne.setOnAction((event) ->
-        {
+        btnRightOne.setOnAction((event) -> {
             showWithdrawalScreen();
         });
-        btnRightTwo.setOnAction((event) ->
-        {
+        btnRightTwo.setOnAction((event) -> {
             showDepositScreen();
         });
-        
+
         gpNumberPad.setVisible(false);
         btnLeftTwo.setOnAction(null);
         btnLeftThree.setOnAction(null);
-        btnLeftFour.setOnAction(null);        
+        btnLeftFour.setOnAction(null);
         btnRightThree.setOnAction(null);
         btnRightFour.setOnAction(null);
     }
@@ -146,33 +159,23 @@ public class FXMLDocumentController implements Initializable {
     private void showSetupAccountScreen()
     {
         apSetupAccountOne.setVisible(true);
-        gpKeyboard.setVisible(true);        
-        btnLeftOne.setOnAction((event)->{createAccount();});
-        btnRightOne.setOnAction((event)->{cancelAccountCreation();});
-         
+        gpKeyboard.setVisible(true);
+        btnLeftOne.setOnAction((event) -> {
+            createAccount();
+        });
+        btnRightOne.setOnAction((event) -> {
+            cancelAccountCreation();
+        });
+
         apWelcomeScreen.setVisible(false);
-        gpNumberPad.setVisible(false);        
+        gpNumberPad.setVisible(false);
         btnLeftTwo.setOnAction(null);
         btnLeftThree.setOnAction(null);
-        btnLeftFour.setOnAction(null);      
+        btnLeftFour.setOnAction(null);
         btnRightTwo.setOnAction(null);
         btnRightThree.setOnAction(null);
         btnRightFour.setOnAction(null);
-        
-        ctfTest.textProperty().addListener((observable)->{
-            String text = ctfTest.getText();
-            boolean isTextEmpty = text == null || text.isEmpty();
-            if (isTextEmpty) 
-            {
-                ctfTest.setLeft(new ImageView(image));
-                System.out.println("empty field");                   
-            } 
-            else 
-            {
-                ctfTest.setLeft(null);
-                System.out.println("something in field");
-            }
-        });
+
     }
 //        ctfTest.textProperty().addListener(new InvalidationListener() {
 //            @Override public void invalidated(Observable arg0) {
@@ -187,7 +190,6 @@ public class FXMLDocumentController implements Initializable {
 //                }
 //            }
 //    });
-        
 
     private void showDepositScreen()
     {
@@ -232,13 +234,28 @@ public class FXMLDocumentController implements Initializable {
 //        btnRightThree.setOnAction(null);
 //        btnRightFour.setOnAction(null);
     }
-    
-    private void createAccount(){
-        
+
+    private void createAccount()
+    {
+        Boolean createSavingsAccount = false;
+        Boolean createCheckingAccount = false;
+
+        if (cbCreateSavings.getValue().toString().equals("Yes")) {
+            createSavingsAccount = true;
+        }
+
+        if (cbCreateChecking.getValue().toString().equals("Yes")) {
+            createCheckingAccount = true;
+        }
+        if (createSavingsAccount || createCheckingAccount) {
+            DBHandler dbHandler = new DBHandler();
+            dbHandler.createNewAccount(tfCAFirstName.getText(), tfCALastName.getText(), tfCAStreetAddress.getText(), tfCACity.getText(), tfCAState.getText(),
+                    tfCAZip.getText(), createCheckingAccount, createSavingsAccount);
+        }
     }
-    
+
     private void cancelAccountCreation()
     {
-        
+
     }
 }
