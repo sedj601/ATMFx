@@ -31,7 +31,7 @@ public class FXMLDocumentController implements Initializable {
     //add check balance screen
 
     @FXML private CustomTextField ctfTest;
-    private static final Image image = new Image("/org/controlsfx/samples/security-low.png");
+    //private static final Image image = new Image("/org/controlsfx/samples/security-low.png");
     
     Map<String, Button> buttons = new HashMap<>();
 
@@ -164,7 +164,7 @@ public class FXMLDocumentController implements Initializable {
             boolean isTextEmpty = text == null || text.isEmpty();
             if (isTextEmpty) 
             {
-                ctfTest.setLeft(new ImageView(image));
+                //ctfTest.setLeft(new ImageView(image));
                 System.out.println("empty field");                   
             } 
             else 
