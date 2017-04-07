@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane prefHeight="448.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <StackPane prefHeight="35.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Setup Accout" />
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="tfFirstName" promptText="Enter first name" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+            <TextField fx:id="tfLastName" promptText="Enter last name" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+            <TextField fx:id="tfStreetAddress" promptText="Enter street address" GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+            <TextField fx:id="tfCity" promptText="Enter City" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+            <TextField fx:id="tfState" promptText="Enter state" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <TextField fx:id="tfZip" promptText="Enter zip" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Label text="Create Checking Account" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="cbChecking" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <ChoiceBox fx:id="cbSavings" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+            <TextField fx:id="tfInitialDepositChecking" promptText="Enter initial deposit" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.rowIndex="6" />
+            <TextField fx:id="tfInitialDepositSavings" promptText="Enter initial deposit" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.rowIndex="8" />
+            <Label text="Create Savings Account" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+   </center>
+   <bottom>
+      <GridPane hgap="5.0" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="1:" GridPane.rowIndex="3" />
+            <Label text="2:" GridPane.rowIndex="2" />
+            <Label text="3:" GridPane.rowIndex="1" />
+            <Label text="4:" />
+            <Label text=":5" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+            <Label text=":6" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+            <Label text=":7" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <Label text=":8" GridPane.columnIndex="9" />
+            <Label fx:id="lbl1" text="Create Account" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+            <Label fx:id="lbl2" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+            <Label fx:id="lbl3" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+            <Label fx:id="lbl4" GridPane.columnIndex="1" GridPane.columnSpan="4" />
+            <Label fx:id="lbl5" alignment="CENTER_RIGHT" text="Cancel" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label fx:id="lbl6" alignment="CENTER_RIGHT" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label fx:id="lbl7" alignment="CENTER_RIGHT" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="lbl8" alignment="CENTER_RIGHT" GridPane.columnIndex="5" GridPane.columnSpan="4" GridPane.halignment="RIGHT" />
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

@@ -5,16 +5,19 @@
  */
 package atmfx;
 
-import DataBaseHandler.*;
 import SedsValidateFx.*;
+import java.io.IOException;
 import java.net.*;
 import java.util.*;
-import javafx.collections.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import org.controlsfx.control.textfield.*;
 
 /**
  *
@@ -22,22 +25,22 @@ import org.controlsfx.control.textfield.*;
  */
 public class FXMLDocumentController implements Initializable {
 
-    @FXML
-    private GridPane gpKeyboard, gpNumberPad;
-    @FXML
-    private AnchorPane apWelcomeScreen, apSetupAccountOne;
-    @FXML
-    private Button btnRightOne, btnRightTwo, btnRightThree, btnRightFour, btnLeftOne, btnLeftTwo, btnLeftThree, btnLeftFour;
-    //add check balance screen
+    
+    
+    @FXML private Button btnRightOne, btnRightTwo, btnRightThree, btnRightFour, btnLeftOne, btnLeftTwo, btnLeftThree, btnLeftFour;
+    @FXML private StackPane spCenterDisplay, spBottomDisplay;
+    @FXML private AnchorPane apMain;
+    
+//add check balance screen
 
-    @FXML
-    private TextField tfCAFirstName, tfCALastName, tfCAStreetAddress, tfCACity, tfCAState, tfCAZip,
-            tfCACheckingInitialDeposit, tfCASavingsInitialDeposit;
-    @FXML
-    private ChoiceBox cbCreateChecking, cbCreateSavings;
+//    @FXML
+//    private TextField tfCAFirstName, tfCALastName, tfCAStreetAddress, tfCACity, tfCAState, tfCAZip,
+//            tfCACheckingInitialDeposit, tfCASavingsInitialDeposit;
+//    @FXML
+//    private ChoiceBox cbCreateChecking, cbCreateSavings;
 
-    @FXML
-    private CustomTextField ctfTest;
+//    @FXML
+//    private CustomTextField ctfTest;
 
     Map<String, Button> buttons = new HashMap<>();
 
@@ -46,11 +49,12 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        cbCreateChecking.setItems(FXCollections.observableArrayList("No", "Yes"));
-        cbCreateSavings.setItems(FXCollections.observableArrayList("No", "Yes"));
-        cbCreateChecking.setValue("No");
-        cbCreateSavings.setValue("No");
+//        cbCreateChecking.setItems(FXCollections.observableArrayList("No", "Yes"));
+//        cbCreateSavings.setItems(FXCollections.observableArrayList("No", "Yes"));
+//        cbCreateChecking.setValue("No");
+//        cbCreateSavings.setValue("No");
 
+        showWelcomeScreen();
         btnLeftOne.setOnAction((event) -> {
             System.out.println("Loading Setup Account Screen");
             showSetupAccountScreen();
@@ -70,112 +74,79 @@ public class FXMLDocumentController implements Initializable {
         btnRightThree.setOnAction(null);
         btnRightFour.setOnAction(null);
 
-        gpKeyboard.getChildren().stream().filter((tempNode)
-                -> (tempNode instanceof Button)).map((
-                tempNode) -> (Button) tempNode).forEachOrdered((tempButton) -> {
-            buttons.put(tempButton.getText().toLowerCase(), tempButton);
-        });
+//        
 
-    }
-
-    @FXML
-    private void handleOnKeyReleased(KeyEvent event)
-    {
-        System.out.println();
-        Button tempButton = buttons.get(event.getText());
-        System.out.println("Released key text: " + event.getText());
-        System.out.println("Released key code: " + event.getCode());
-
-        if (tempButton != null) {
-            tempButton.disarm();
-            tempButton.setStyle("");
-        }
-        else if (event.getCode().equals(KeyCode.ENTER)) {
-            tempButton = buttons.get("enter");
-            tempButton.disarm();
-            tempButton.setStyle("");
-        }
-        else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
-            tempButton = buttons.get("backspace");
-            tempButton.disarm();
-            tempButton.setStyle("");
-        }
-        else if (event.getCode().equals(KeyCode.SPACE)) {
-            tempButton = buttons.get("space");
-            tempButton.disarm();
-            tempButton.setStyle("");
-        }
-    }
-
-    @FXML
-    private void handleOnKeyPressed(KeyEvent event)
-    {
-        Button tempButton = buttons.get(event.getText());
-        System.out.println("Pressed key text: " + event.getText());
-        System.out.println("Pressed key code: " + event.getCode());
-        if (tempButton != null) {
-            tempButton.arm();
-            tempButton.setStyle("-fx-background-color: blue");
-        }
-        else if (event.getCode().equals(KeyCode.ENTER)) {
-            tempButton = buttons.get("enter");
-            tempButton.arm();
-            tempButton.setStyle("-fx-background-color: blue");
-        }
-        else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
-            tempButton = buttons.get("backspace");
-            tempButton.arm();
-            tempButton.setStyle("-fx-background-color: blue");
-        }
-        else if (event.getCode().equals(KeyCode.SPACE)) {
-            tempButton = buttons.get("space");
-            tempButton.arm();
-            tempButton.setStyle("-fx-background-color: blue");
-        }
     }
 
     private void showWelcomeScreen()
     {
-        apWelcomeScreen.setVisible(true);
-        gpKeyboard.setVisible(true);
-        btnLeftOne.setOnAction((event) -> {
-            showSetupAccountScreen();
-        });
-        btnRightOne.setOnAction((event) -> {
-            showWithdrawalScreen();
-        });
-        btnRightTwo.setOnAction((event) -> {
-            showDepositScreen();
-        });
-
-        gpNumberPad.setVisible(false);
-        btnLeftTwo.setOnAction(null);
-        btnLeftThree.setOnAction(null);
-        btnLeftFour.setOnAction(null);
-        btnRightThree.setOnAction(null);
-        btnRightFour.setOnAction(null);
+        try 
+        {
+            BorderPane root = FXMLLoader.load(getClass().getResource("SubWelcomeScreen.fxml"));
+            spCenterDisplay.getChildren().add(root);
+            
+            btnLeftOne.setOnAction((event) -> {
+                showSetupAccountScreen();
+            });
+//            btnRightOne.setOnAction((event) -> {
+//                showWithdrawalScreen();
+//            });
+//            btnRightTwo.setOnAction((event) -> {
+//                showDepositScreen();
+//            });
+            
+            btnLeftTwo.setOnAction(null);
+            btnLeftThree.setOnAction(null);
+            btnLeftFour.setOnAction(null);
+            btnRightThree.setOnAction(null);
+            btnRightFour.setOnAction(null);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void showSetupAccountScreen()
     {
-        apSetupAccountOne.setVisible(true);
-        gpKeyboard.setVisible(true);
-        btnLeftOne.setOnAction((event) -> {
-            createAccount();
-        });
-        btnRightOne.setOnAction((event) -> {
-            cancelAccountCreation();
-        });
+        try 
+        {
+            spCenterDisplay.getChildren().remove(0);            
+            BorderPane root = FXMLLoader.load(getClass().getResource("SubSetupAccount.fxml"));
+            spCenterDisplay.getChildren().add(root);
+            GridPane tempDisplay = (GridPane)root.getChildren().get(1);
+            loadQWERTYKeyboard();
+            
+            TextField tfFirstName, tfLastName, tfStreetAddress, tfCity, tfState, tfZip, tfInitialDepositChecking, tfInitialDepositSavings;
+            ChoiceBox cbChecking, cbSavings;
+            
+            tfFirstName = (TextField)findNodeByID("tfFirstName", tempDisplay.getChildren());
+            System.out.println(tfFirstName.getId());
+//            if(true)//come back and check to make sure all info is in textfields
+//            {
+//                btnLeftOne.setOnAction((event) -> {
+//                    createAccount();
+//                });
+//            }
+//            else
+//            {
+//                //create Alert 
+//            }
+            
+            btnRightOne.setOnAction((event) -> {
+                cancelAccountCreation();
+            });
 
-        apWelcomeScreen.setVisible(false);
-        gpNumberPad.setVisible(false);
-        btnLeftTwo.setOnAction(null);
-        btnLeftThree.setOnAction(null);
-        btnLeftFour.setOnAction(null);
-        btnRightTwo.setOnAction(null);
-        btnRightThree.setOnAction(null);
-        btnRightFour.setOnAction(null);
-
+            btnLeftTwo.setOnAction(null);
+            btnLeftThree.setOnAction(null);
+            btnLeftFour.setOnAction(null);
+            btnRightTwo.setOnAction(null);
+            btnRightThree.setOnAction(null);
+            btnRightFour.setOnAction(null);
+        }
+        catch (IOException ex) 
+        {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 //        ctfTest.textProperty().addListener(new InvalidationListener() {
 //            @Override public void invalidated(Observable arg0) {
@@ -235,27 +206,113 @@ public class FXMLDocumentController implements Initializable {
 //        btnRightFour.setOnAction(null);
     }
 
-    private void createAccount()
-    {
-        Boolean createSavingsAccount = false;
-        Boolean createCheckingAccount = false;
-
-        if (cbCreateSavings.getValue().toString().equals("Yes")) {
-            createSavingsAccount = true;
-        }
-
-        if (cbCreateChecking.getValue().toString().equals("Yes")) {
-            createCheckingAccount = true;
-        }
-        if (createSavingsAccount || createCheckingAccount) {
-            DBHandler dbHandler = new DBHandler();
-            dbHandler.createNewAccount(tfCAFirstName.getText(), tfCALastName.getText(), tfCAStreetAddress.getText(), tfCACity.getText(), tfCAState.getText(),
-                    tfCAZip.getText(), createCheckingAccount, createSavingsAccount);
-        }
-    }
+//    private void createAccount()
+//    {
+//        Boolean createSavingsAccount = false;
+//        Boolean createCheckingAccount = false;
+//
+//        if (cbCreateSavings.getValue().toString().equals("Yes")) {
+//            createSavingsAccount = true;
+//        }
+//
+//        if (cbCreateChecking.getValue().toString().equals("Yes")) {
+//            createCheckingAccount = true;
+//        }
+//        if (createSavingsAccount || createCheckingAccount) {
+//            DBHandler dbHandler = new DBHandler();
+//            dbHandler.createNewAccount(tfCAFirstName.getText(), tfCALastName.getText(), tfCAStreetAddress.getText(), tfCACity.getText(), tfCAState.getText(),
+//                    tfCAZip.getText(), createCheckingAccount, createSavingsAccount);
+//        }
+//    }
 
     private void cancelAccountCreation()
     {
 
+    }
+    
+    
+    private void loadQWERTYKeyboard()
+    {
+        try 
+        {
+            AnchorPane keyboardRoot = FXMLLoader.load(getClass().getResource("KeyboardQWERTY.fxml"));
+            System.out.println(keyboardRoot.getId());
+            spBottomDisplay.getChildren().add(keyboardRoot);
+            
+            GridPane tempKeyboard = (GridPane)keyboardRoot.getChildren().get(0);
+            
+            tempKeyboard.getChildren().stream().filter((tempNode)
+                    -> (tempNode instanceof Button)).map((
+                            tempNode) -> (Button) tempNode).forEachOrdered((tempButton) -> {
+                                buttons.put(tempButton.getText().toLowerCase(), tempButton);
+                            });
+            
+            apMain.setOnKeyPressed((event) -> {
+                Button tempButton = buttons.get(event.getText());
+                if (tempButton != null) {
+                    tempButton.arm();
+                    tempButton.setStyle("-fx-background-color: blue");
+                }
+                else if (event.getCode().equals(KeyCode.ENTER)) {
+                    tempButton = buttons.get("enter");
+                    tempButton.arm();
+                    tempButton.setStyle("-fx-background-color: blue");
+                }
+                else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
+                    tempButton = buttons.get("backspace");
+                    tempButton.arm();
+                    tempButton.setStyle("-fx-background-color: blue");
+                }
+                else if (event.getCode().equals(KeyCode.SPACE)) {
+                    tempButton = buttons.get("space");
+                    tempButton.arm();
+                    tempButton.setStyle("-fx-background-color: blue");
+                }
+            });
+            
+            apMain.setOnKeyReleased((event) -> {
+                System.out.println();
+                Button tempButton = buttons.get(event.getText());
+                System.out.println("Released key text: " + event.getText());
+                System.out.println("Released key code: " + event.getCode());
+
+                if (tempButton != null) {
+                    tempButton.disarm();
+                    tempButton.setStyle("");
+                }
+                else if (event.getCode().equals(KeyCode.ENTER)) {
+                    tempButton = buttons.get("enter");
+                    tempButton.disarm();
+                    tempButton.setStyle("");
+                }
+                else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
+                    tempButton = buttons.get("backspace");
+                    tempButton.disarm();
+                    tempButton.setStyle("");
+                }
+                else if (event.getCode().equals(KeyCode.SPACE)) {
+                    tempButton = buttons.get("space");
+                    tempButton.disarm();
+                    tempButton.setStyle("");
+                }
+            });
+        }
+        catch (IOException ex) 
+        {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private Node findNodeByID(String id, ObservableList<Node> observableList)
+    {
+        for(Node node : observableList)
+        {
+            if(node.getId().equals(id))
+            {
+                return node;
+            }
+        }
+        
+        return null;
     }
 }

@@ -2,18 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
-<AnchorPane id="AnchorPane" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" prefHeight="650.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atmfx.FXMLDocumentController">
+<!--onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased"--> 
+<AnchorPane id="AnchorPane" fx:id="apMain" prefHeight="650.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atmfx.FXMLDocumentController">
    <children>
       <BorderPane layoutX="263.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -23,22 +18,22 @@
                      <children>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnLeftFour" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnLeftFour" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="4" />
                            </children>
                         </StackPane>
                         <StackPane prefHeight="0.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnLeftThree" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnLeftThree" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="3" />
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnLeftTwo" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnLeftTwo" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="2" />
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnLeftOne" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnLeftOne" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="1" />
                            </children>
                         </StackPane>
                      </children>
@@ -53,22 +48,22 @@
                      <children>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnRightFour" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnRightFour" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="8" />
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnRightThree" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnRightThree" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="7" />
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnRightTwo" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnRightTwo" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="6" />
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <Button fx:id="btnRightOne" minHeight="35.0" mnemonicParsing="false" text="Button" />
+                              <Button fx:id="btnRightOne" minHeight="35.0" minWidth="52.0" mnemonicParsing="false" text="5" />
                            </children>
                         </StackPane>
                      </children>
@@ -84,278 +79,14 @@
             </StackPane>
          </top>
          <center>
-            <StackPane fx:id="spMainDisplay" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <StackPane fx:id="spCenterDisplay" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="5.0" />
                </BorderPane.margin>
-               <children>
-                  <AnchorPane fx:id="apWelcomeScreen" maxHeight="-Infinity" prefHeight="331.0" prefWidth="200.0">
-                     <children>
-                        <GridPane layoutX="138.0" layoutY="130.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="5">
-                                 <children>
-                                    <Label text="What would you like to do today?" />
-                                 </children>
-                              </StackPane>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
-                                 <children>
-                                    <Label text="Setup Account" />
-                                 </children>
-                              </StackPane>
-                              <StackPane prefHeight="50.0" prefWidth="146.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3">
-                                 <children>
-                                    <Label text="Deposit" />
-                                 </children>
-                              </StackPane>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4">
-                                 <children>
-                                    <Label text="Withdrawal" />
-                                 </children>
-                              </StackPane>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="apSetupAccountOne" maxHeight="-Infinity" prefHeight="331.0" prefWidth="200.0" visible="false">
-                     <children>
-                        <GridPane layoutX="138.0" layoutY="130.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <StackPane GridPane.columnSpan="2">
-                                 <children>
-                                    <Label text="Enter first name:" StackPane.alignment="CENTER_RIGHT" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCAFirstName" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" />
-                              <StackPane GridPane.columnSpan="2" GridPane.rowIndex="1">
-                                 <children>
-                                    <Label text="Enter last name:" StackPane.alignment="CENTER_RIGHT" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCALastName" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                              <StackPane GridPane.columnSpan="2" GridPane.rowIndex="2">
-                                 <children>
-                                    <Label text="Enter street address:" StackPane.alignment="CENTER_RIGHT" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCAStreetAddress" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                              <StackPane GridPane.columnSpan="2" GridPane.rowIndex="3">
-                                 <children>
-                                    <Label text="Enter city:" StackPane.alignment="CENTER_RIGHT" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCACity" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                              <StackPane GridPane.columnSpan="2" GridPane.rowIndex="4">
-                                 <children>
-                                    <Label text="Enter State:" StackPane.alignment="CENTER_RIGHT" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCAState" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                              <StackPane alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.rowIndex="5">
-                                 <children>
-                                    <Label text="Enter zip code:" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCAZip" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                              <StackPane alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.rowIndex="7">
-                                 <children>
-                                    <Label text="Initial deposit amount:" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCACheckingInitialDeposit" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-                              <StackPane GridPane.columnSpan="2" GridPane.rowIndex="10">
-                                 <children>
-                                    <Label text="Create Account" />
-                                 </children>
-                              </StackPane>
-                              <StackPane prefHeight="50.0" prefWidth="146.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="10">
-                                 <children>
-                                    <Label text="Cancel" />
-                                 </children>
-                              </StackPane>
-                              <StackPane alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.rowIndex="6">
-                                 <children>
-                                    <Label text="Create checking account:" />
-                                 </children>
-                              </StackPane>
-                              <StackPane alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.rowIndex="9">
-                                 <children>
-                                    <Label prefHeight="0.0" text="Initial deposit amont:" />
-                                 </children>
-                              </StackPane>
-                              <StackPane alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.rowIndex="8">
-                                 <children>
-                                    <Label text="Create savings account:" />
-                                 </children>
-                              </StackPane>
-                              <TextField fx:id="tfCASavingsInitialDeposit" onKeyPressed="#handleOnKeyPressed" onKeyReleased="#handleOnKeyReleased" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-                              <ChoiceBox fx:id="cbCreateChecking" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-                              <ChoiceBox fx:id="cbCreateSavings" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-               </children>
             </StackPane>
          </center>
          <bottom>
-            <StackPane BorderPane.alignment="CENTER">
-               <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" visible="false">
-                     <children>
-                        <GridPane fx:id="gpNumberPad" hgap="5.0" vgap="5.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" />
-                            <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="8" GridPane.columnIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="7" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="9" GridPane.columnIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="1" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="4" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="0" GridPane.rowIndex="3" />
-                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" text="00" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <Button maxHeight="28.0" mnemonicParsing="false" text="Button" GridPane.columnIndex="4" />
-                              <Button maxHeight="28.0" mnemonicParsing="false" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <Button maxHeight="28.0" mnemonicParsing="false" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                              <Button maxHeight="28.0" mnemonicParsing="false" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" />
-                           </padding>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity">
-                     <children>
-                        <GridPane fx:id="gpKeyboard" layoutX="14.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" />
-                            <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                          </columnConstraints>
-                          <rowConstraints>
-                              <RowConstraints vgrow="SOMETIMES" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="A" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="Z" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="7" GridPane.columnIndex="15" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="Q" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="S" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="X" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="8" GridPane.columnIndex="16" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="W" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="E" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="D" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="C" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="9" GridPane.columnIndex="17" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="2" GridPane.columnIndex="16" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="R" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="F" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="V" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="4" GridPane.columnIndex="15" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="T" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="G" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="B" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="5" GridPane.columnIndex="16" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="Y" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="H" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="N" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="6" GridPane.columnIndex="17" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="U" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="J" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="M" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="1" GridPane.columnIndex="15" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="I" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="O" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="P" GridPane.columnIndex="10" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" mnemonicParsing="false" text="Backspace" GridPane.columnIndex="11" GridPane.rowIndex="1" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="K" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="L" GridPane.columnIndex="10" GridPane.rowIndex="2" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="3" GridPane.columnIndex="17" GridPane.rowIndex="3" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="0" GridPane.columnIndex="15" GridPane.rowIndex="4" />
-                              <Button minHeight="35.0" minWidth="35.0" mnemonicParsing="false" text="." GridPane.columnIndex="16" GridPane.rowIndex="4" />
-                              <Button minHeight="35.0" mnemonicParsing="false" text="00" GridPane.columnIndex="17" GridPane.rowIndex="4" />
-                              <Button minHeight="35.0" mnemonicParsing="false" text="Enter" GridPane.columnIndex="11" GridPane.rowIndex="3" />
-                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Space" GridPane.columnIndex="4" GridPane.columnSpan="5" GridPane.rowIndex="4" GridPane.rowSpan="2" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </StackPane>
+            <StackPane fx:id="spBottomDisplay" prefHeight="140.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>
