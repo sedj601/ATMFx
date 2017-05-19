@@ -6,12 +6,15 @@
 package atmfx;
 
 import DataBaseHandler.DBHandler;
+import DataBaseHandler.NewAccountInfo;
 import SedsValidateFx.*;
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.scene.Node;
@@ -42,62 +45,27 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        showWelcomeScreen();
-        btnLeftOne.setOnAction((event) -> {
-            showSetupAccountScreen();
-        });       
-
-        btnRightOne.setOnAction((event) -> {
-            showWithdrawalScreen();
-        });
-        
-        btnRightTwo.setOnAction((event) -> {
-            showDepositScreen();
-        });
-        
-        btnLeftTwo.setOnAction(null);
-        btnLeftThree.setOnAction(null);
-        btnLeftFour.setOnAction(null);
-        btnRightThree.setOnAction(null);
-        btnRightFour.setOnAction(null);
+        showWelcomeScreen();        
     }
 
-    private void showWelcomeScreen()
-    {
-        try 
-        {
-            BorderPane root = FXMLLoader.load(getClass().getResource("SubWelcomeScreen.fxml"));
-            spCenterDisplay.getChildren().add(root);
-            
-            btnLeftOne.setOnAction((event) -> {
-                showSetupAccountScreen();
-            });
-//            btnRightOne.setOnAction((event) -> {
-//                showWithdrawalScreen();
-//            });
-//            btnRightTwo.setOnAction((event) -> {
-//                showDepositScreen();
-//            });
-            
-            btnLeftTwo.setOnAction(null);
-            btnLeftThree.setOnAction(null);
-            btnLeftFour.setOnAction(null);
-            btnRightThree.setOnAction(null);
-            btnRightFour.setOnAction(null);
-        }
-        catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     private void showSetupAccountScreen()
     {
         try 
         {
-            spCenterDisplay.getChildren().remove(0);            
+            btnLeftOne.setDisable(true);
+            btnLeftTwo.setDisable(true);
+            btnLeftThree.setDisable(true);
+            btnLeftFour.setDisable(true);
+            btnRightTwo.setDisable(true);
+            btnRightThree.setDisable(true);
+            btnRightFour.setDisable(true);
+            
+            spCenterDisplay.getChildren().remove(0);//remove old display            
             BorderPane root = FXMLLoader.load(getClass().getResource("SubSetupAccount.fxml"));
-            spCenterDisplay.getChildren().add(root);
-            GridPane tempDisplay = (GridPane)root.getChildren().get(1);
+            spCenterDisplay.getChildren().add(root);//add new display
+            GridPane tempDisplay = (GridPane)root.getChildren().get(1);//get Parent of the nodes I will be using in this controller
             loadQWERTYKeyboard();            
             
             TextField tfFirstName = (TextField)findNodeByID("tfFirstName", tempDisplay.getChildren());
@@ -107,31 +75,22 @@ public class FXMLDocumentController implements Initializable {
             TextField tfState = (TextField)findNodeByID("tfState", tempDisplay.getChildren());
             TextField tfZip = (TextField)findNodeByID("tfZip", tempDisplay.getChildren());
             TextField tfInitialDepositChecking = (TextField)findNodeByID("tfInitialDepositChecking", tempDisplay.getChildren());
-            TextField tfInitialDepositSavings  = (TextField)findNodeByID("tfInitialDepositSavings", tempDisplay.getChildren());
+            tfInitialDepositChecking.setDisable(true);
             ChoiceBox cbChecking  = (ChoiceBox)findNodeByID("cbChecking", tempDisplay.getChildren());
             cbChecking.getItems().addAll("No", "Yes");
             cbChecking.setValue("No");
-            ChoiceBox cbSavings  = (ChoiceBox)findNodeByID("cbSavings", tempDisplay.getChildren());
+            cbChecking.getSelectionModel().selectedItemProperty().addListener((obserValue, oldValue, newValue)->{
+                tfInitialDepositChecking.setDisable(!newValue.equals("Yes"));
+            });            
+            TextField tfInitialDepositSavings  = (TextField)findNodeByID("tfInitialDepositSavings", tempDisplay.getChildren());
+            tfInitialDepositSavings.setDisable(true);            
+            ChoiceBox cbSavings  = (ChoiceBox)findNodeByID("cbSavings", tempDisplay.getChildren());            
             cbSavings.getItems().addAll("No", "Yes");
             cbSavings.setValue("No");            
-            
-            if(true)//come back and check to make sure all info is in textfields
-            {
-                btnLeftOne.setOnAction((event) -> {
-                    
-                    boolean createChecking = cbChecking.getValue().equals("Yes");
-                    boolean createSavings = cbSavings.getValue().equals("Yes");
-                    
-                    dbh.createNewAccount(tfFirstName.getText(), tfLastName.getText(), tfStreetAddress.getText(), tfCity.getText(), 
-                                         tfState.getText(), tfZip.getText(), createChecking, Double.parseDouble(tfInitialDepositChecking.getText()),
-                                         createSavings, Double.parseDouble(tfInitialDepositSavings.getText()));
-                });
-            }
-            else
-            {
-                //create Alert 
-            }
-            
+            cbSavings.getSelectionModel().selectedItemProperty().addListener((obserValue, oldValue, newValue)->{
+                tfInitialDepositSavings.setDisable(!newValue.equals("Yes"));
+            });
+                
             btnRightOne.setOnAction((event) -> {
                 cancelAccountCreation();
             });
@@ -142,12 +101,56 @@ public class FXMLDocumentController implements Initializable {
             btnRightTwo.setOnAction(null);
             btnRightThree.setOnAction(null);
             btnRightFour.setOnAction(null);
+            
+            btnLeftOne.disableProperty().bind(
+                    Bindings.isEmpty(tfFirstName.textProperty())
+                    .and(Bindings.isEmpty(tfLastName.textProperty()))
+                    .and(Bindings.isEmpty(tfStreetAddress.textProperty()))
+                    .and(Bindings.isEmpty(tfCity.textProperty()))
+                    .and(Bindings.isEmpty(tfState.textProperty()))
+                    .and(Bindings.isEmpty(tfState.textProperty()))
+                    .and(Bindings.isEmpty(tfState.textProperty()))
+                    .and(Bindings.isEmpty(tfZip.textProperty()))
+                    .or(Bindings.isEmpty(tfInitialDepositChecking.textProperty()))
+                    .and(Bindings.isEmpty(tfInitialDepositSavings.textProperty()))
+            );
+            
+             btnLeftOne.setOnAction((event) -> {
+                NewAccountInfo nai = new NewAccountInfo();
+                nai.setFirstName(tfFirstName.getText());
+                nai.setLastName(tfLastName.getText());
+                nai.setStreetAddress(tfStreetAddress.getText());
+                nai.setCity(tfCity.getText());
+                nai.setState(tfState.getText());
+                nai.setZip(tfZip.getText());
+                if(cbChecking.getValue().equals("Yes"))
+                {
+                    nai.setCreateChecking(true);
+                    nai.setIniCheckingDeposit(Double.parseDouble(tfInitialDepositChecking.getText()));
+                }
+                if(cbSavings.getValue().equals("Yes"))
+                {
+                    nai.setCreateSavings(true);
+                    nai.setIniSavingsDeposite(Double.parseDouble(tfInitialDepositSavings.getText()));
+                }
+                
+                createAccount(nai);
+            });
+            
+            
+            
+            
+            
+            
+            
         }
         catch (IOException ex) 
         {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
 //        ctfTest.textProperty().addListener(new InvalidationListener() {
 //            @Override public void invalidated(Observable arg0) {
 //                String text = inputField.getText();
@@ -206,8 +209,8 @@ public class FXMLDocumentController implements Initializable {
 //        btnRightFour.setOnAction(null);
     }
 
-//    private void createAccount()
-//    {
+    private void createAccount(NewAccountInfo nai)
+    {
 //        Boolean createSavingsAccount = false;
 //        Boolean createCheckingAccount = false;
 //
@@ -223,13 +226,69 @@ public class FXMLDocumentController implements Initializable {
 //            dbHandler.createNewAccount(tfCAFirstName.getText(), tfCALastName.getText(), tfCAStreetAddress.getText(), tfCACity.getText(), tfCAState.getText(),
 //                    tfCAZip.getText(), createCheckingAccount, createSavingsAccount);
 //        }
-//    }
+    }
 
-    private void cancelAccountCreation()
+    
+    private void showAccountSuccessfullyCreateScreen()
     {
         
     }
     
+    private void showWelcomeScreen()
+    {
+        
+        try 
+        { 
+            btnLeftOne.setDisable(false);
+            btnLeftTwo.setDisable(true);
+            btnLeftThree.setDisable(true);
+            btnLeftFour.setDisable(true);
+            btnRightOne.setDisable(false);
+            btnRightTwo.setDisable(false);
+            btnRightThree.setDisable(true);
+            btnRightFour.setDisable(true);
+            
+            btnLeftOne.setOnAction((event) -> {
+                showSetupAccountScreen();
+            });       
+
+            btnRightOne.setOnAction((event) -> {
+                showWithdrawalScreen();
+            });
+
+            btnRightTwo.setOnAction((event) -> {
+                showDepositScreen();
+            });
+
+            
+        
+            BorderPane root = FXMLLoader.load(getClass().getResource("SubWelcomeScreen.fxml"));
+            spCenterDisplay.getChildren().add(root);
+            
+            btnLeftOne.setOnAction((event) -> {
+                showSetupAccountScreen();
+            });            
+        }
+        catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void cancelAccountCreation()
+    {
+        if(spCenterDisplay.getChildren().size() > 0)
+        {
+            spCenterDisplay.getChildren().remove(0);
+        }
+        
+        if(spBottomDisplay.getChildren().size() > 0)
+        {
+            spBottomDisplay.getChildren().remove(0);
+        }
+        
+         btnLeftOne.disableProperty().unbind();
+         showWelcomeScreen();
+    }
     
     private void loadQWERTYKeyboard()
     {
@@ -310,10 +369,6 @@ public class FXMLDocumentController implements Initializable {
             if(node.getId().equals(id))
             {
                 return node;
-            }
-            else
-            {
-                System.out.println(node.getId());
             }
         }
         

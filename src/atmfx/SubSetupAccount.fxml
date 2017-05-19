@@ -49,10 +49,10 @@
          <children>
             <TextField fx:id="tfFirstName" promptText="Enter first name" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
             <TextField fx:id="tfLastName" promptText="Enter last name" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-            <TextField fx:id="tfStreetAddress" promptText="Enter street address" GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.rowIndex="3" />
-            <TextField fx:id="tfCity" promptText="Enter City" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-            <TextField fx:id="tfState" promptText="Enter state" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <TextField fx:id="tfZip" promptText="Enter zip" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <TextField fx:id="tfStreetAddress" promptText="Enter street address" GridPane.columnIndex="2" GridPane.columnSpan="8" GridPane.rowIndex="2" />
+            <TextField fx:id="tfCity" promptText="Enter City" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+            <TextField fx:id="tfState" promptText="Enter state" GridPane.columnIndex="6" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextField fx:id="tfZip" promptText="Enter zip" GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="3" />
             <Label fx:id="label1" text="Create Checking Account" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
             <ChoiceBox fx:id="cbChecking" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
             <ChoiceBox fx:id="cbSavings" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="8" />
