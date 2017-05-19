@@ -72,12 +72,6 @@ public class FXMLDocumentController implements Initializable {
             btnLeftOne.setOnAction((event) -> {
                 showSetupAccountScreen();
             });
-//            btnRightOne.setOnAction((event) -> {
-//                showWithdrawalScreen();
-//            });
-//            btnRightTwo.setOnAction((event) -> {
-//                showDepositScreen();
-//            });
             
             btnLeftTwo.setOnAction(null);
             btnLeftThree.setOnAction(null);
@@ -94,10 +88,10 @@ public class FXMLDocumentController implements Initializable {
     {
         try 
         {
-            spCenterDisplay.getChildren().remove(0);            
+            spCenterDisplay.getChildren().remove(0);//remove old display            
             BorderPane root = FXMLLoader.load(getClass().getResource("SubSetupAccount.fxml"));
-            spCenterDisplay.getChildren().add(root);
-            GridPane tempDisplay = (GridPane)root.getChildren().get(1);
+            spCenterDisplay.getChildren().add(root);//add new display
+            GridPane tempDisplay = (GridPane)root.getChildren().get(1);//get Parent of the nodes I will be using in this controller
             loadQWERTYKeyboard();            
             
             TextField tfFirstName = (TextField)findNodeByID("tfFirstName", tempDisplay.getChildren());
@@ -309,11 +303,12 @@ public class FXMLDocumentController implements Initializable {
         {
             if(node.getId().equals(id))
             {
+                System.out.println("node found!");
                 return node;
             }
             else
             {
-                System.out.println(node.getId());
+                System.out.println("node not found yet!");
             }
         }
         
